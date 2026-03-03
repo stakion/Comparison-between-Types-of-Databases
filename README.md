@@ -15,6 +15,7 @@
 - [Synchronization & Consistency](#-synchronization--consistency-protocols)
 - [Conclusions](#-conclusions)
 - [References](#-references)
+<br>
 
 ## 📝 Overview
 This repository documents a comparative study of the main types of modern databases, analyzing their characteristics, advantages, limitations, and ideal use cases. The following categories are covered:
@@ -26,7 +27,7 @@ This repository documents a comparative study of the main types of modern databa
 | Fault-Tolerant | RIAK, MySQL Cluster |
 | Checkpointing | SQLite, Neo4j |
 | Delta Lake | Delta Lake (Databricks) |
-
+<br>
 
 ## 🗂️ Database Types
 ### General Classification of Analyzed Databases
@@ -44,7 +45,7 @@ This repository documents a comparative study of the main types of modern databa
 | **PouchDB** | ✅ | ✅ | ❌ | ✅ | ❌ | Document |
 | **Delta Lake** | ✅ | ❌ | ❌ | ✅ | ✅ | Data Lakehouse |
 | **PostgreSQL** | ❌ (native) | ❌ | ❌ | ✅ | ✅ | Relational |
-
+<br>
 
 ## 1. Distributed Databases
 Systems that store data across multiple physical locations but behave as a single unified system, allowing transparent and simultaneous access from different sites.
@@ -60,6 +61,7 @@ Systems that store data across multiple physical locations but behave as a singl
 | **Security** | Encryption, authentication, and distributed access control | Home alarm system with different locks on each door |
 | **Scalability** | Increases capacity by adding more nodes | Adding wagons to a train to carry more passengers |
 | **Load Balancing** | Distributes operations evenly across nodes | Multiple checkout lanes in a supermarket |
+<br>
 
 ### Notable Distributed Databases
 | Database | Node Type | Scalability | Consistency | Primary Use Case |
@@ -71,7 +73,7 @@ Systems that store data across multiple physical locations but behave as a singl
 | CockroachDB | Peer-to-peer | Horizontal | Strong (ACID) | Finance, global applications |
 | PouchDB | Peer-to-peer (sync CouchDB) | Limited | Eventual | Offline-first apps |
 | Redis | Master-Slave / Cluster | Horizontal | Configurable | Cache, sessions, queues |
-
+<br>
 
 ## 2. NoSQL Databases
 Systems that do not use the typical SQL relational model. Useful for handling large volumes of sparse data and varied data structures.
@@ -84,6 +86,7 @@ Systems that do not use the typical SQL relational model. Useful for handling la
 | **Columnar** | Data organized by columns | Apache Cassandra, HBase | Time-series, analytics |
 | **Graph** | Nodes and relationships | Neo4j, Amazon Neptune | Social networks, recommendations |
 | **Multi-model** | Combination of models | ArangoDB, Couchbase | Heterogeneous data applications |
+<br>
 
 ### NoSQL Comparative Feature Matrix
 | Feature | MongoDB | RIAK | DynamoDB | Couchbase | CouchDB |
@@ -95,7 +98,7 @@ Systems that do not use the typical SQL relational model. Useful for handling la
 | Ad-hoc queries | ✅ | ❌ | Limited | ✅ | ✅ |
 | Secondary indexes | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Open source | ✅ | ✅ | ❌ | ✅ (CE) | ✅ |
-
+<br>
 
 ## 3. Serverless Databases
 Services where the cloud provider automatically handles scaling and optimization. Users pay only for the resources they consume.
@@ -108,6 +111,7 @@ Services where the cloud provider automatically handles scaling and optimization
 | **Simplified Management** | Provider handles infrastructure and maintenance | Lower operational burden for the team |
 | **Cloud Integration** | Native connectivity with other cloud services | Integrated ecosystem |
 | **Agile Development** | Developers focus solely on code | Faster development cycles |
+<br>
 
 ### Serverless Solutions Comparison
 | Platform | Provider | Underlying Engine | Min Scale | Max Scale | Cold Start | Billing Basis |
@@ -118,7 +122,7 @@ Services where the cloud provider automatically handles scaling and optimization
 | **PlanetScale** | PlanetScale | Vitess/MySQL | 0 | Automatic | Minimal | Per row read/written |
 | **FaunaDB** | Fauna | Fauna | 0 | Automatic | Minimal | Per operation |
 | **Firebase Realtime DB** | Google | Proprietary | 0 | Automatic | None | Per GB stored / downloaded |
-
+<br>
 
 ## 4. Fault-Tolerant Databases
 Systems designed to guarantee data availability and integrity even when component failures occur, through techniques such as replication and automatic recovery.
@@ -131,12 +135,14 @@ Systems designed to guarantee data availability and integrity even when componen
 | **Automatic Failover** | Switches to backup systems without manual intervention | Emergency generator in a hospital that activates on power outage |
 | **Load Balancing** | Distributes load to reduce single points of failure | Highway with multiple lanes — traffic diverts if one is blocked |
 | **Continuous Monitoring** | Constant supervision to detect and resolve issues quickly | Home alarm system that alerts when something goes wrong |
+<br>
 
 ### Replication Types
 | Type | How It Works | Consistency | Performance | Use Case |
 |------|-------------|:-----------:|:-----------:|----------|
 | **Synchronous** | Transaction is not committed until all replicas are updated | High | ↓ Lower (latency) | Critical financial data |
 | **Asynchronous** | Replicas are updated with a delay | Eventual | ↑ Higher | Logs, analytics, media content |
+<br>
 
 ### Load Balancing Algorithms
 | Algorithm | How It Works | Advantage | Limitation |
@@ -144,7 +150,7 @@ Systems designed to guarantee data availability and integrity even when componen
 | **Round Robin** | Distributes requests sequentially across all nodes | Simple and predictable | Ignores current node load |
 | **Least Connections** | Routes to the node with fewest active connections | Fairer under variable loads | Higher tracking overhead |
 | **Consistent Hashing** | Distributes via hash function over keys | Reference locality, fewer redistributions | More complex to implement |
-
+<br>
 
 
 ## 5. Databases with Checkpointing
@@ -158,19 +164,21 @@ Databases that periodically save a snapshot of their state to enable fast recove
 | **Data Loss Minimization** | Frequent checkpoints reduce the window of potential data loss | Multiple save slots in a game |
 | **Performance Efficiency** | Balance between checkpoint frequency and overall system throughput | Deciding how often to save a long project |
 | **Automation** | Checkpoints triggered automatically by time or specific events | Scheduled automatic irrigation system |
+<br>
 
 ### Checkpointing Types
 | Type | How It Works | Performance Impact | Recovery Complexity |
 |------|-------------|:-----------------:|:-------------------:|
 | **Synchronous** | All queries pause while state is written to persistent storage | High (introduces latency) | Low (state is always consistent) |
 | **Asynchronous** | Queries continue while the checkpoint is being written | Low | High (must account for concurrent queries during checkpoint) |
+<br>
 
 ### Log-Based Recovery Theory (WAL)
 | Operation | Description | When It Applies |
 |-----------|-------------|-----------------|
 | **REDO** | Re-executes operations that completed before the failure but were not fully persisted | Commit occurred but data was not written to disk |
 | **UNDO** | Rolls back operations that were in progress at the time of failure | Transaction left the system in an inconsistent state |
-
+<br>
 
 ## 6. Delta Lake / Data Lake
 ### Data Lake vs Data Warehouse vs Data Lakehouse
@@ -185,6 +193,7 @@ Databases that periodically save a snapshot of their state to enable fast recove
 | Underlying technology | Hadoop / S3 | Proprietary SQL | Delta Lake / Iceberg |
 | Scalability | Petabytes | Terabytes | Petabytes |
 | Schema flexibility | High | Low | High |
+<br>
 
 ### Delta Lake Feature Breakdown
 | Feature | Description | Benefit |
@@ -196,7 +205,7 @@ Databases that periodically save a snapshot of their state to enable fast recove
 | **Apache Spark Integration** | Distributed high-performance processing | Scalability for big data workloads |
 | **Unified Batch + Streaming** | Both processing modes on the same platform | Simplified architecture |
 | **Z-Order Optimization** | Co-locates related data to minimize read overhead | Faster analytical query performance |
-
+<br>
 
 ## 🔍 Head-to-Head Comparisons
 ### MongoDB vs MySQL
@@ -211,6 +220,7 @@ Databases that periodically save a snapshot of their state to enable fast recove
 | Performance on unstructured data | ✅ Superior | ❌ Inferior |
 | Strict security & consistency | ❌ Weaker | ✅ Stronger |
 | Ideal use cases | Modern apps, variable schemas | ERP, finance, structured data |
+<br>
 
 ### RIAK vs MongoDB
 | Criterion | RIAK | MongoDB |
@@ -222,6 +232,7 @@ Databases that periodically save a snapshot of their state to enable fast recove
 | Ad-hoc queries | Very limited | ✅ Full support |
 | Fault tolerance | ✅ Very high | ✅ High |
 | Operational complexity | Medium | Medium–High |
+<br>
 
 ### Neo4j vs Relational Databases
 | Criterion | Neo4j | PostgreSQL / MySQL |
@@ -232,7 +243,7 @@ Databases that periodically save a snapshot of their state to enable fast recove
 | Use cases | Social networks, fraud detection, recommendations | Transactions, reporting |
 | Horizontal scalability | ✅ (enterprise edition) | Limited |
 | ACID support | ✅ | ✅ |
-
+<br>
 
 ## 🧭 Selection Guide: When to Use Each Type
 | Need / Scenario | Recommendation | Reason |
@@ -247,7 +258,7 @@ Databases that periodically save a snapshot of their state to enable fast recove
 | High-volume distributed writes | Apache Cassandra | Write-optimized, peer-to-peer architecture |
 | Real-time analytics + ML pipelines | Delta Lake + Spark | Unified batch and streaming platform |
 | Distributed financial / transactional data | CockroachDB | Distributed ACID with standard SQL interface |
-
+<br>
 
 ## 🔄 Synchronization & Consistency Protocols
 ### CAP Theorem
@@ -257,6 +268,7 @@ Databases that periodically save a snapshot of their state to enable fast recove
 | **C** — Consistency | All nodes see the same data at the same time |
 | **A** — Availability | Every request receives a response |
 | **P** — Partition Tolerance | The system operates even if communication between nodes fails |
+<br>
 
 | Database | CAP Guarantee |
 |----------|:-------------:|
@@ -266,6 +278,7 @@ Databases that periodically save a snapshot of their state to enable fast recove
 | HBase | CP |
 | CockroachDB | CP |
 | DynamoDB | AP (configurable) |
+<br>
 
 ### Consistency Levels
 | Level | Description | Performance Cost | Typical Use |
@@ -274,6 +287,7 @@ Databases that periodically save a snapshot of their state to enable fast recove
 | **Causal** | Causally related operations are seen in order | Medium | Social networks, messaging |
 | **Eventual** | Data converges to the same value eventually, with no timing guarantee | Low | DNS, shopping carts, likes |
 | **Weak** | No synchronization guarantees | Minimal | Metrics, telemetry |
+<br>
 
 ### Synchronization Protocols
 | Protocol | Description | Advantage | Limitation |
@@ -281,7 +295,7 @@ Databases that periodically save a snapshot of their state to enable fast recove
 | **Distributed Locking** | Controls access to data during concurrent transactions | Prevents write conflicts | Can cause deadlocks |
 | **Timestamps** | Each transaction receives a unique timestamp to establish ordering | Deterministic ordering | Requires clock synchronization across nodes |
 | **Two-Phase Commit (2PC)** | All nodes must agree before a transaction is committed | Full consistency guarantee | Slow or blocked if a node fails mid-protocol |
-
+<br>
 
 ## 📊 Visual Summary by Use Case
 
@@ -297,6 +311,7 @@ HIGH │  Delta Lake ──── Cassandra ──── HBase
          Simple      Distributed     Graph / Analytics
                    (architecture type)
 ```
+<br>
 
 ## 📌 Conclusions
 1. **There is no universal database engine**: each system has advantages and limitations depending on the environment and requirements.
@@ -305,7 +320,7 @@ HIGH │  Delta Lake ──── Cassandra ──── HBase
 4. **For fault tolerance with no single point of failure**: RIAK stands out thanks to its masterless, ring-based architecture.
 5. **For debugging and relationship-heavy queries**: Neo4j simplifies analysis through its native graph model and depth-first search traversal.
 6. **Benchmarks are environment-dependent**: hardware, software, operating system, and network bandwidth all directly affect each engine's behavior, making fair cross-system comparisons challenging without a controlled environment.
-
+<br>
 
 ## 📚 References
 | # | Resource | Link |
