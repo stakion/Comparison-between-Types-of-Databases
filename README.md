@@ -313,6 +313,7 @@ HIGH │  Delta Lake ──── Cassandra ──── HBase
 ```
 <br>
 
+
 ## 📌 Conclusions
 1. **There is no universal database engine**: each system has advantages and limitations depending on the environment and requirements.
 2. **For simple environments**: SQLite or MySQL are sufficient and efficient with minimal setup.
